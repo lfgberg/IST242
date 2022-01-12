@@ -1,5 +1,5 @@
 Ford Fiesta
 2018
 ST 
-Sedan
-38.2
+Truck
+35.2

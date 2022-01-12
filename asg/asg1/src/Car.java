@@ -1,4 +1,4 @@
-package app;
+
 
 /*
  * Liam Geyer
@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Car {
 
     public static String getModel(Scanner scan) throws Exception{
         String model;
