@@ -106,7 +106,7 @@ public class Review {
             //  Attempt to read from the file
             Scanner input = new Scanner(fileName);
 
-            //  Read each line of the car file
+            //  Read each line of the report file
             while (input.hasNextLine()){
                 System.out.println(input.nextLine());
             }
