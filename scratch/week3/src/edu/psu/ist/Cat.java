@@ -97,4 +97,17 @@ public class Cat {
     public String toString(){
         return (name + ", " + yearBorn + ", " + breed + ", pure = " + isPureBreed);
     }
+
+    /*
+    Determines whether a breed is valid
+    @param breed the breed to validate
+    @return true if the breed is valid
+     */
+    public static boolean isValidBreed(String breed){
+        if (breed.equals("Tabby")){
+            return true;
+        }
+
+        return false;
+    }
 }
