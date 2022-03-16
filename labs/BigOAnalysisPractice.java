@@ -35,7 +35,7 @@ public class BigOAnalysisPractice {
     }
 
     // 4.
-    // Big-O is: O(n)
+    // Big-O is: O(log(n))
     public static void mystery3(int n) {
         int[] arr = new int[n];
 
@@ -92,5 +92,3 @@ public class BigOAnalysisPractice {
 
     public static void main(String[] args) {
 
-    }
-}
