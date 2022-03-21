@@ -6,13 +6,13 @@
 
 package edu.psu.ist.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class UtilListImpl<T> implements ISplittableList<T> {
-    private final List<T> left = new ArrayList<>();
-    private final List<T> right = new ArrayList<>();
+    private final List<T> left = new LinkedList<>();
+    private final List<T> right = new LinkedList<>();
 
 
     @Override
@@ -37,7 +37,7 @@ public class UtilListImpl<T> implements ISplittableList<T> {
     @Override
     public void moveToVeryBeginning() { // O(1)
         //  create a temp list with all the entries from left, and then right
-        List<T> x = new ArrayList<>();
+        List<T> x = new LinkedList<>();
         x.addAll(left);
         x.addAll(right);
 

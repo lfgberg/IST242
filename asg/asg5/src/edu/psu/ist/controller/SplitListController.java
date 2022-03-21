@@ -14,8 +14,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class SplitListController {
     public static final String OUTPUT_FILE_NAME = "contents.txt";
@@ -116,21 +118,28 @@ public class SplitListController {
      * is just reinitialized (and an error msg is displayed).
      */
     private void save() throws Exception {
+        //  instead of mutating the model, mutate the .toString() output
+        String[] raw = listModel.toString().split("><");
+        raw[0] = raw[0].replace("<", "");
+        raw[1] = raw[1].replace(">", "");
+        String[] a = raw[0].split(", ");  //  left side
+        String[] b = raw[1].split(", ");  //  right side
 
-        /*
-        I don't see a need to mutate the model to save
-        I think the best way to do this would be to have a method in the UtilListImpl
-        that outputs and imports in csv format or something similar, but that's more work than I want to do
-         */
+        //  Put each element from the array into a string
+        String left = "";
+        String right = "";
+
+        for (int i = (a.length - 1); i >= 0; i--){
+            left = left.concat(a[i] + ",");
+        }
+        for (int i = (b.length - 1); i >= 0; i--){
+            right = right.concat(b[i] + ",");
+        }
+
+        //  write to outfile
         try (PrintWriter out = new PrintWriter(OUTPUT_FILE_NAME)) {
-
-            //  split into left and right
-            String x = listModel.toString();
-            String[] y = x.split("><");
-
-            //  write to file
-            out.println(y[0].replace("<", ""));
-            out.println(y[1].replace(">", ""));
+            out.println(left);
+            out.println(right);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -149,17 +158,17 @@ public class SplitListController {
             Scanner input = new Scanner(inputFile);
 
             //  read each line out of the file
-            left = List.of(input.nextLine().split(", "));
-            right = List.of(input.nextLine().split(", "));
+            left = List.of(input.nextLine().split(","));
+            right = List.of(input.nextLine().split(","));
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
 
-        //  read the input from the file back into the model
-        for (String x : left){
+        //  read the input from the file back into the model, move forward the proper amount
+        for (String x : right){
             listModel.addToRightAtFront(x);
         }
-        for (String x : right){
+        for (String x : left){
             listModel.addToRightAtFront(x);
         }
         for (int i = 0; i < left.size(); i++){
