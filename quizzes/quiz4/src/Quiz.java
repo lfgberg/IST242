@@ -59,7 +59,7 @@ public class Quiz {
      * @return the length of the maximum/longest edit region.
      */
     public static int editRgnDist(String s) { //  <-- kickoff
-        return editRgnDist(s, -1);
+        return editRgnDist(s, 0);
     }
 
     private static int editRgnDist(String s, int result){
@@ -78,7 +78,7 @@ public class Quiz {
           recurse, this time searching the string AFTER the first edit region
           if the length of this edit region is bigger than the current result, make it the new result
          */
-        return editRgnDist(s.substring(s.indexOf("[") + 1), x > result ? x : result);
+        return editRgnDist(s.substring(s.indexOf("]") + 1), x > result ? x : result);
     }
 
     public static void main(String[] args) {
@@ -89,10 +89,10 @@ public class Quiz {
         System.out.println(stackRecur(3) + "\n"); //  6
 
         //  testing editRgnDist
-        System.out.println(editRgnDist("meow. [mark make coffee].. [jerry] bring [wa]ter.")); //  18
-        System.out.println(editRgnDist("[]i[max][m]")); //  5
-        System.out.println(editRgnDist("[supersort]")); //  11
         System.out.println(editRgnDist("...")); //  0
         System.out.println(editRgnDist("[]")); //  2
+        System.out.println(editRgnDist("[supersort]")); //  11
+        System.out.println(editRgnDist("[]i[max][m]")); //  5
+        System.out.println(editRgnDist("meow. [mark make coffee].. [jerry] bring [wa]ter.")); //  18
     }
 }
