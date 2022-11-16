@@ -65,8 +65,35 @@ public class TrLockImpl implements IDialLock{
         ArrayList<Turn> firstSequence = new ArrayList<>();
         ArrayList<Turn> secondSequence = new ArrayList<>();
         ArrayList<Turn> thirdSequence = new ArrayList<>();
-        
-        return false;
+        int i = 0;
+
+        while (i < moves.size() && moves.get(i).dir == Turn.Direction.R) {
+            firstSequence.add(moves.get(i));
+            i++;
+        }
+        while (i < moves.size() && moves.get(i).dir == Turn.Direction.L) {
+            secondSequence.add(moves.get(i));
+            i++;
+        }
+        while (i < moves.size() && moves.get(i).dir == Turn.Direction.R) {
+            thirdSequence.add(moves.get(i));
+            i++;
+        }
+
+        //  Defensive checks
+        if (firstSequence.size() + secondSequence.size() + thirdSequence.size() != moves.size()) {
+            return false; // all three lists must add up to the original length of the moves sequence
+        }
+
+        if (firstSequence.isEmpty() || secondSequence.isEmpty() || thirdSequence.isEmpty()){
+            return false; //  someone skipped a left or right turn sequence
+        }
+
+        if (firstSequence.get(firstSequence.size() - 1).stopDigit == s1 &&
+        secondSequence.get(secondSequence.size() - 1).stopDigit == s2 &&
+        thirdSequence.get(thirdSequence.size() - 1).stopDigit == s3){
+            return true; // combo matches
+        } else return false;
     }
 
     @Override
