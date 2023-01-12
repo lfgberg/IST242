@@ -1,0 +1,8 @@
+Title: test
+Genre: HORROR
+Runtime: 10.00
+Episodes:
+
+S1 pilot
+S2 test
+S5 lol
